@@ -1,5 +1,5 @@
 function computerPlay(){
-    return choices[Math.floor(Math.random()*3)];
+    return choices[Math.floor(Math.random()*2)];
 }
 function playRound(){
 let computerSelection=computerPlay();
