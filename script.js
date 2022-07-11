@@ -8,6 +8,13 @@ const computerImg=document.createElement('img');
 const result =document.querySelector('#result');
 const hintPlay=document.querySelector(".hintPlay");
 const hintComp=document.querySelector(".hintComp");
+const playerScore=document.querySelector("#playerSide>#score");
+const computerScore=document.querySelector("#computerSide>#score");
+const parent = document.querySelector(".container");
+const allChilds=document.querySelectorAll(".container>*");
+
+let winings=0;
+let losses=0;
 window.setTimeout(function() {
     playerSelect.removeChild(hintPlay);
     computerSelect.removeChild(hintComp);
@@ -17,7 +24,9 @@ rock.addEventListener("click",function(){
     playerSelection="rock";
     playerImg.setAttribute("src","./images/rock.png");
     playerSelect.appendChild(playerImg)
-    result.textContent=playRound(); 
+    result.textContent=playRound();
+    console.log(result.textContent);
+    scoreTrack(result.textContent);
     }
 )
 paper.addEventListener("click",function(){
@@ -25,13 +34,16 @@ paper.addEventListener("click",function(){
     playerImg.setAttribute("src","./images/paper.jpeg");
     playerSelect.appendChild(playerImg);
     result.textContent=playRound(); 
+    scoreTrack(result.textContent)
     }
 )
 scissors.addEventListener("click",function(){
     playerSelection="scissors";
     playerImg.setAttribute("src","./images/scissors.png");
     playerSelect.appendChild(playerImg)
-    result.textContent=playRound(); 
+    result.textContent=playRound();
+    scoreTrack(result.textContent) ;
+
     }
 )
 function computerPlay(){
@@ -77,6 +89,33 @@ switch (computerSelection){
             }
     }
 
+}
+function scoreTrack(result){
+    let congrats=document.createElement("div");
+    congrats.classList.add('congrats');
+    congrats.textContent="CONGRATULATION !";
+
+    let condo=document.createElement("div");
+    condo.classList.add('condo');
+    condo.textContent="NEVER GIVEUP , TRY AGAIN !";
+
+    if (result.split(' ').includes("WON")){
+        winings ++;
+        playerScore.textContent=winings.toString();
+    }else if(result.split(' ').includes("LOSE")){
+        losses ++;
+        computerScore.textContent=losses.toString();
+    }
+    if (winings == 5 | losses == 5){ 
+        Array.from(allChilds).forEach((item)=>parent.removeChild(item));
+        if (winings > losses){
+            parent.appendChild(congrats);
+        }else{
+            parent.appendChild(condo);
+        }
+        window.setTimeout(()=>location.reload(),2000);
+    }
+     
 }
 const choices=["rock","paper","scissors"];
 let playerSelection;
