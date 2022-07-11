@@ -6,6 +6,13 @@ const computerSelect = document.querySelector("#computerSelection");
 const playerImg=document.createElement('img');
 const computerImg=document.createElement('img');
 const result =document.querySelector('#result');
+const hintPlay=document.querySelector(".hintPlay");
+const hintComp=document.querySelector(".hintComp");
+window.setTimeout(function() {
+    playerSelect.removeChild(hintPlay);
+    computerSelect.removeChild(hintComp);
+    },700);
+    
 rock.addEventListener("click",function(){
     playerSelection="rock";
     playerImg.setAttribute("src","./images/rock.png");
@@ -34,42 +41,41 @@ function playRound(){
 computerSelection=computerPlay();
 switch (computerSelection){
     case "rock":
+        
         computerImg.setAttribute("src","./images/rock.png");
         computerSelect.appendChild(computerImg);
         break;
     case "paper":    
+
         computerImg.setAttribute("src","./images/paper.jpeg");
         computerSelect.appendChild(computerImg);
         break;
     case "scissors":
+        
         computerImg.setAttribute("src","./images/scissors.png");
         computerSelect.appendChild(computerImg);
         break;
 }
-if (choices.includes(playerSelection)){
     switch(playerSelection){
         case "rock":
             switch (computerSelection){
-                case "rock": return "table" ;break;
-                case "scissors": return "you won , rock beats scissors"; break;
-                case "paper": return "you lose , paper beats rock";break;
-        }
+                case "rock": return "TABLE" ;break;
+                case "scissors": return "you WON ! rock beats scissors"; break;
+                case "paper": return "you LOSE !  paper beats rock";break;
+            }
         case "paper":
             switch (computerSelection){
-                case "paper": return "table"; break;
-                case "rock": return "you won , paper beats rock"; break;
-                case "scissors": return "you lose , scissors beats paper";break;
+                case "paper": return "TABLE"; break;
+                case "rock": return "you WON ! , paper beats rock"; break;
+                case "scissors": return "you LOSE ! , scissors beats paper";break;
             }    
         case "scissors": 
             switch (computerSelection){
-                case "scissors": return "table";break;
-                case "paper": return "you won , scissors beats paper"; break;
-                case "rock": return "you lose , rock beats scissors";break;
+                case "scissors": return "TABLE";break;
+                case "paper": return "you WON ! , scissors beats paper"; break;
+                case "rock": return "you LOSE ! , rock beats scissors";break;
             }
     }
-}else{
-    playRound();
-}
 
 }
 const choices=["rock","paper","scissors"];
